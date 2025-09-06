@@ -1,357 +1,83 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>1340 – Indumentaria Urbana</title>
-  <meta name="description" content="1340 – Indumentaria urbana. Simple y variado. Buzos y remeras." />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luciano Clothing - Tienda Urbana</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://sdk.mercadopago.com/js/v2"></script>
+  <script>
+    // Inicialización MercadoPago (ejemplo, falta tu public key)
+    const mp = new MercadoPago('TU_PUBLIC_KEY_AQUI');
+  </script>
   <style>
-    :root{
-      --bg:#0f0f10;          /* Fondo oscuro urbano */
-      --card:#17181a;        /* Tarjetas */
-      --muted:#9aa1a9;       /* Texto secundario */
-      --text:#f6f7f9;        /* Texto principal */
-      --brand:#e5e7eb;       /* Neutro claro para minimalismo */
-      --accent:#ffffff;      /* Blanco puro para CTA */
-      --line:#26282c;        /* Bordes suaves */
-      --ok:#16a34a;          /* Éxito */
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    .container{width:min(1200px,92%);margin-inline:auto}
-    /* NAV */
-    header{position:sticky;top:0;z-index:50;background:rgba(15,15,16,.7);backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-    .brand{font-weight:800;letter-spacing:.08em}
-    .brand .mark{display:inline-block;padding:.32rem .6rem;border:1.4px solid var(--text);border-radius:12px}
-    .nav a{opacity:.92;margin-left:18px}
-    .nav a:hover{opacity:1}
-    .cart-btn{position:relative;padding:.6rem 1rem;border-radius:12px;border:1px solid var(--line);background:transparent;cursor:pointer}
-    .cart-count{position:absolute;top:-6px;right:-6px;background:var(--ok);color:#fff;border-radius:999px;font-size:.72rem;line-height:1;padding:4px 7px;border:2px solid var(--bg)}
-    /* HERO */
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;padding:48px 0 24px;border-bottom:1px solid var(--line)}
-    .hero h1{font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin:0 0 10px}
-    .hero p{color:var(--muted);margin:0 0 22px}
-    .cta{display:flex;gap:12px;align-items:center}
-    .btn{padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--accent);color:#000;font-weight:700;cursor:pointer}
-    .btn.secondary{background:transparent;color:var(--text)}
-    .hero-card{background:linear-gradient(180deg,#17181a, #111215);border:1px solid var(--line);border-radius:18px;padding:16px}
-    .badge{display:inline-flex;gap:8px;align-items:center;font-size:.85rem;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px;margin-top:10px}
-    /* FILTERS */
-    .filters{display:flex;flex-wrap:wrap;gap:10px;padding:18px 0}
-    .chip{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#121316;cursor:pointer}
-    .chip.active{border-color:#fff}
-    /* GRID */
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
-    .product-card{grid-column:span 6;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-    .product-card .thumb{aspect-ratio:4/5;background:#0e0f10;display:flex;align-items:center;justify-content:center}
-    .product-card .body{padding:14px 14px 16px}
-    .title{font-weight:700}
-    .muted{color:var(--muted)}
-    .price{font-weight:800;margin-left:auto}
-    .row{display:flex;gap:10px;align-items:center}
-    .size{padding:6px 9px;border:1px solid var(--line);border-radius:10px;font-size:.85rem}
-    .card-actions{display:flex;gap:10px;margin-top:12px}
-    .btn.full{width:100%}
-    /* CART DRAWER */
-    .drawer{position:fixed;inset:0;display:none}
-    .drawer.open{display:block}
-    .backdrop{position:absolute;inset:0;background:rgba(0,0,0,.5)}
-    .panel{position:absolute;right:0;top:0;height:100%;width:min(440px, 96%);background:#111215;border-left:1px solid var(--line);padding:16px 14px 18px;display:flex;flex-direction:column}
-    .panel h3{margin:0 0 10px}
-    .cart-list{display:flex;flex-direction:column;gap:12px;overflow:auto}
-    .cart-item{display:grid;grid-template-columns:72px 1fr auto;gap:12px;border:1px solid var(--line);border-radius:14px;padding:10px;background:#17181a}
-    .qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px}
-    .qty button{background:transparent;border:0;color:var(--text);font-weight:700;padding:6px 10px;cursor:pointer}
-    .qty span{display:inline-block;min-width:28px;text-align:center}
-    .divider{height:1px;background:var(--line);margin:12px 0}
-    .total{display:flex;justify-content:space-between;align-items:center;font-weight:800}
-    .pay-group{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-    .note{font-size:.9rem;color:var(--muted)}
-    /* SECTIONS */
-    section{padding:24px 0}
-    h2{font-size:1.6rem;margin:0 0 8px}
-    /* FOOTER */
-    footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted)}
-    /* RESPONSIVE */
-    @media (min-width:900px){
-      .product-card{grid-column:span 4}
-    }
-    @media (max-width:800px){
-      .hero{grid-template-columns:1fr}
-    }
-    /* Small helper classes */
-    .sr{position:absolute !important;left:-9999px !important}
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header { background: black; color: white; padding: 1rem; text-align: center; }
+    nav a { margin: 0 10px; color: white; text-decoration: none; }
+    section { padding: 2rem; }
+    .productos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+    .producto { border: 1px solid #ccc; padding: 1rem; border-radius: 8px; text-align: center; }
+    .producto img { max-width: 100%; height: auto; border-radius: 8px; }
+    footer { background: #f1f1f1; padding: 1rem; text-align: center; }
   </style>
 </head>
 <body>
-  <!-- NAVBAR -->
   <header>
-    <div class="container nav">
-      <div class="brand"><span class="mark">1340</span> <span class="muted">/ Simple y Urbano</span></div>
-      <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#productos">Productos</a>
-        <a href="#sobre">Sobre nosotros</a>
-        <a href="#contacto">Contacto</a>
-        <button class="cart-btn" id="openCart" aria-label="Abrir carrito">
-          Carrito <span class="cart-count" id="cartCount">0</span>
-        </button>
-      </nav>
-    </div>
+    <h1>Luciano Clothing</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#carrito">Carrito</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#sobre">Sobre Nosotros</a>
+    </nav>
   </header>
 
-  <!-- HERO -->
-  <section class="container hero" id="inicio">
-    <div>
-      <h1>Indumentaria Urbana 1340</h1>
-      <p>Concepto simple, calidad real. Buzos y remeras para todos los días, sin vueltas.</p>
-      <div class="cta">
-        <a class="btn" href="#productos">Ver productos</a>
-        <a class="btn secondary" href="#contacto">Escríbenos</a>
-      </div>
-      <div class="badge">Stock limitado • Envíos en 24/48 hs</div>
-    </div>
-    <div class="hero-card">
-      <img src="assets/hero-placeholder.jpg" alt="Colección 1340"/>
-      <div class="note">Tip: reemplazá <code>assets/hero-placeholder.jpg</code> por una foto apaisada de tu colección.</div>
-    </div>
+  <section id="inicio">
+    <h2>Bienvenido a Luciano Clothing</h2>
+    <p>Indumentaria urbana, simple y variada. Encontrá tu estilo.</p>
   </section>
 
-  <!-- PRODUCTOS -->
-  <section class="container" id="productos">
+  <section id="productos">
     <h2>Productos</h2>
-    <p class="muted">Filtrar por categoría</p>
-    <div class="filters">
-      <button class="chip active" data-filter="all">Todo</button>
-      <button class="chip" data-filter="Hombre">Hombre</button>
-      <button class="chip" data-filter="Dama">Dama</button>
-      <button class="chip" data-filter="Accesorios">Accesorios</button>
-    </div>
-    <div class="grid" id="productGrid" aria-live="polite"></div>
-  </section>
-
-  <!-- SOBRE NOSOTROS -->
-  <section class="container" id="sobre">
-    <h2>Sobre nosotros</h2>
-    <p>1340 es una marca de indumentaria urbana con un enfoque minimalista. Diseñamos y seleccionamos prendas cómodas y versátiles, pensadas para durar. Creemos en lo simple bien hecho.</p>
-  </section>
-
-  <!-- CONTACTO -->
-  <section class="container" id="contacto">
-    <h2>Contacto</h2>
-    <p class="muted">¿Dudas, cambios de talle o compras mayoristas? Escribinos.</p>
-    <form id="contactForm" onsubmit="contactSubmit(event)" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--card);border:1px solid var(--line);padding:14px;border-radius:16px">
-      <label>Nombre<br><input required name="nombre" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1012;color:var(--text)"></label>
-      <label>Email<br><input required type="email" name="email" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1012;color:var(--text)"></label>
-      <label style="grid-column:1/-1">Mensaje<br><textarea required name="mensaje" rows="4" style="width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#0f1012;color:var(--text)"></textarea></label>
-      <div style="grid-column:1/-1;display:flex;gap:10px;align-items:center">
-        <button class="btn" type="submit">Enviar</button>
-        <a class="btn secondary" href="https://wa.me/5491112345678" target="_blank" rel="noopener">WhatsApp</a>
-        <span class="note">Reemplazá el número por tu WhatsApp.</span>
+    <div class="productos">
+      <div class="producto">
+        <img src="assets/img/buzo-jordan-bordo.jpg" alt="Buzo Jordan Bordo" />
+        <h3>Buzo Jordan Bordo</h3>
+        <p>Talle L</p>
+        <p><strong>$27.000</strong></p>
       </div>
-    </form>
+      <div class="producto">
+        <img src="assets/img/buzo-jordan-blanco.jpg" alt="Buzo Jordan Blanco" />
+        <h3>Buzo Jordan Blanco</h3>
+        <p>Talle XL</p>
+        <p><strong>$27.000</strong></p>
+      </div>
+      <!-- Agregá más productos repitiendo este bloque -->
+    </div>
+  </section>
+
+  <section id="carrito">
+    <h2>Carrito</h2>
+    <p>Aquí aparecerán los productos que selecciones.</p>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Email: contacto@lucianoclothing.com</p>
+    <p>Instagram: @lucianoclothing</p>
+  </section>
+
+  <section id="sobre">
+    <h2>Sobre Luciano Clothing</h2>
+    <p>
+      Luciano Clothing es una marca de ropa urbana con un concepto simple y variado. 
+      Nos enfocamos en ofrecer prendas cómodas, modernas y accesibles.
+    </p>
   </section>
 
   <footer>
-    <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
-      <div>© <span id="year"></span> 1340. Hecho en Argentina.</div>
-      <div class="muted">Instagram · TikTok · Facebook</div>
-    </div>
+    <p>&copy; 2025 Luciano Clothing. Todos los derechos reservados.</p>
   </footer>
-
-  <!-- CART DRAWER -->
-  <aside class="drawer" id="cartDrawer" aria-hidden="true">
-    <div class="backdrop" id="closeCart"></div>
-    <div class="panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <h3 id="cartTitle">Tu carrito</h3>
-        <button class="btn secondary" id="closeCartTop">Cerrar</button>
-      </div>
-      <div class="cart-list" id="cartList" style="margin-top:10px"></div>
-      <div class="divider"></div>
-      <div class="total"><span>Total</span><span id="cartTotal">$0</span></div>
-      <div class="pay-group">
-        <button class="btn full" onclick="checkout('mp')">Pagar con Mercado Pago</button>
-        <button class="btn secondary full" onclick="checkout('transfer')">Transferencia / Tarjeta</button>
-        <div class="note">Mercado Pago: listo para conectar. Ver instrucciones en el código <code>checkout()</code>.</div>
-      </div>
-    </div>
-  </aside>
-
-  <script>
-    /* =====================
-       Datos de productos
-       =====================
-       👉 Reemplazá las rutas de imagen por tus archivos reales.
-       Podés subirlos a /assets y usar esos nombres.
-    */
-    const ARS = new Intl.NumberFormat('es-AR', { style:'currency', currency:'ARS', maximumFractionDigits:0 });
-
-    const products = [
-      // HOMBRE – Buzos $27.000 (provistos por Ariel)
-      { id:'jordan-bordo-l',    name:'Buzo Jordan Bordó',  price:27000, size:'L',  category:'Hombre',  img:'assets/jordan-bordo.jpg'   },
-      { id:'jordan-blanco-xl',  name:'Buzo Jordan Blanco', price:27000, size:'XL', category:'Hombre',  img:'assets/jordan-blanco.jpg'  },
-      { id:'jordan-uva-l',      name:'Buzo Jordan Uva',    price:27000, size:'L',  category:'Hombre',  img:'assets/jordan-uva.jpg'     },
-      { id:'jordan-negro-xl',   name:'Buzo Jordan Negro',  price:27000, size:'XL', category:'Hombre',  img:'assets/jordan-negro.jpg'   },
-
-      // Dama – dejar preparados (agregá aquí cuando tengas fotos y precios)
-      // { id:'buzo-dama-verde-m', name:'Buzo Dama Verde', price:xxxx, size:'M', category:'Dama', img:'assets/dama-verde.jpg' },
-    ];
-
-    /* =====================
-       Render de productos
-       ===================== */
-    const grid = document.getElementById('productGrid');
-    const chips = document.querySelectorAll('.chip');
-
-    function render(filter='all'){
-      grid.innerHTML = '';
-      const list = products.filter(p => filter==='all' ? true : p.category===filter);
-      if(!list.length){
-        grid.innerHTML = `<div class="note">No hay productos en esta categoría aún.</div>`;
-        return;
-      }
-      for(const p of list){
-        const card = document.createElement('article');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
-          <div class="body">
-            <div class="row">
-              <div class="title">${p.name}</div>
-              <div class="price">${ARS.format(p.price)}</div>
-            </div>
-            <div class="row" style="margin-top:6px"><span class="muted">Categoría:</span>&nbsp;${p.category} <span class="size" title="Talle">${p.size}</span></div>
-            <div class="card-actions">
-              <button class="btn full" onclick="addToCart('${p.id}')">Agregar al carrito</button>
-            </div>
-          </div>`;
-        grid.appendChild(card);
-      }
-    }
-
-    chips.forEach(ch => ch.addEventListener('click', e=>{
-      chips.forEach(x => x.classList.remove('active'));
-      e.currentTarget.classList.add('active');
-      render(e.currentTarget.dataset.filter);
-    }));
-
-    /* =====================
-       Carrito básico
-       ===================== */
-    const cartKey = 'cart-1340';
-    const state = { cart: JSON.parse(localStorage.getItem(cartKey) || '[]') };
-
-    function save(){ localStorage.setItem(cartKey, JSON.stringify(state.cart)); }
-    function syncBadge(){ document.getElementById('cartCount').textContent = state.cart.reduce((a,i)=>a+i.qty,0); }
-
-    function addToCart(id){
-      const p = products.find(x=>x.id===id);
-      if(!p) return;
-      const existing = state.cart.find(x=>x.id===id);
-      if(existing) existing.qty++;
-      else state.cart.push({ id:p.id, name:p.name, price:p.price, img:p.img, size:p.size, qty:1 });
-      save(); syncBadge();
-      openCart();
-      renderCart();
-    }
-
-    function mutateQty(id, delta){
-      const it = state.cart.find(x=>x.id===id); if(!it) return;
-      it.qty += delta; if(it.qty<=0){ state.cart = state.cart.filter(x=>x.id!==id); }
-      save(); renderCart(); syncBadge();
-    }
-
-    function removeItem(id){ state.cart = state.cart.filter(x=>x.id!==id); save(); renderCart(); syncBadge(); }
-
-    function total(){ return state.cart.reduce((a,i)=> a + i.price*i.qty, 0); }
-
-    function renderCart(){
-      const list = document.getElementById('cartList');
-      list.innerHTML = '';
-      if(!state.cart.length){
-        list.innerHTML = `<div class="note">Tu carrito está vacío.</div>`;
-        document.getElementById('cartTotal').textContent = ARS.format(0);
-        return;
-      }
-      for(const it of state.cart){
-        const row = document.createElement('div');
-        row.className = 'cart-item';
-        row.innerHTML = `
-          <img src="${it.img}" alt="${it.name}">
-          <div>
-            <div style="font-weight:700">${it.name}</div>
-            <div class="muted">Talle ${it.size}</div>
-            <div class="qty" style="margin-top:6px">
-              <button aria-label="Restar" onclick="mutateQty('${it.id}',-1)">–</button>
-              <span>${it.qty}</span>
-              <button aria-label="Sumar" onclick="mutateQty('${it.id}',1)">+</button>
-            </div>
-          </div>
-          <div style="text-align:right">
-            <div>${ARS.format(it.price*it.qty)}</div>
-            <button class="btn secondary" style="margin-top:8px" onclick="removeItem('${it.id}')">Quitar</button>
-          </div>`;
-        list.appendChild(row);
-      }
-      document.getElementById('cartTotal').textContent = ARS.format(total());
-    }
-
-    // Drawer controls
-    const drawer = document.getElementById('cartDrawer');
-    const openBtn = document.getElementById('openCart');
-    const closeBtn = document.getElementById('closeCart');
-    const closeTop = document.getElementById('closeCartTop');
-    function openCart(){ drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); }
-    function closeCart(){ drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); }
-    openBtn.addEventListener('click', openCart); closeBtn.addEventListener('click', closeCart); closeTop.addEventListener('click', closeCart);
-
-    /* =====================
-       Checkout: Mercado Pago / Transferencia
-       =====================
-       🔗 INTEGRACIÓN RÁPIDA:
-       1) Creá una preferencia en tu cuenta de Mercado Pago y obtené su `init_point`.
-       2) Reemplazá MP_CHECKOUT_URL más abajo por ese `init_point` para redirigir al checkout.
-       3) (Avanzado) Si usás Checkout Bricks, montalo en una página /checkout e intercambiá el redirect por tu flujo.
-    */
-    const MP_CHECKOUT_URL = 'https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=REEMPLAZAR_POR_TU_PREFERENCE_ID';
-
-    function checkout(method){
-      if(!state.cart.length){ alert('Tu carrito está vacío.'); return; }
-      // Podrías enviar el carrito a tu backend aquí antes de pagar.
-      switch(method){
-        case 'mp':
-          window.location.href = MP_CHECKOUT_URL; // redirección simple al checkout de Mercado Pago
-          break;
-        case 'transfer':
-          const msg = `Transferencia bancaria\n\nAlias: 1340.tienda.mp\nCBU: 0000000000000000000000\nTitular: Tu Nombre\n\nTotal: ${ARS.format(total())}\n\nEnviá el comprobante por WhatsApp para coordinar envío.`;
-          alert(msg);
-          break;
-        default:
-          alert('Método no soportado por ahora.');
-      }
-    }
-
-    /* =====================
-       Contacto (demo sin backend)
-       ===================== */
-    function contactSubmit(e){
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target).entries());
-      const text = encodeURIComponent(`Hola 1340!\nSoy ${data.nombre} (${data.email}).\n${data.mensaje}`);
-      window.open(`https://wa.me/5491112345678?text=${text}`, '_blank');
-    }
-
-    // Init
-    document.getElementById('year').textContent = new Date().getFullYear();
-    render('all');
-    renderCart();
-    syncBadge();
-  </script>
 </body>
 </html>
