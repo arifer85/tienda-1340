@@ -1,0 +1,150 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fafafa;
+  color: #111;
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+}
+
+header .logo {
+  max-height: 80px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.intro {
+  text-align: center;
+  padding: 30px 20px;
+}
+
+#productos {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+#productos h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.item img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.item p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.item span {
+  color: #555;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.item button {
+  padding: 8px 12px;
+  border: none;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.item button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+#carrito {
+  padding: 30px 20px;
+  background: #fff;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+#carrito h2 {
+  margin-bottom: 10px;
+}
+
+#carrito-lista {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+#pagar-mp {
+  background: #009ee3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#newsletter {
+  text-align: center;
+  padding: 40px 20px;
+  background: #f0f0f0;
+}
+
+#newsletter form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+#newsletter input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#newsletter button {
+  padding: 10px 15px;
+  border: none;
+  background: #111;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: #fff;
+  margin-top: 40px;
+}
