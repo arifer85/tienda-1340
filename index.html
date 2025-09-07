@@ -3,219 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUCIANO clothing</title>
+  <title>Luciano clothing</title>
   <link rel="stylesheet" href="assets/css/styles.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #f5f5f5, #ffffff);
-      color: #333;
-    }
-
-    header {
-      text-align: center;
-      padding: 60px 20px 40px;
-    }
-
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-    }
-
-    header h1 strong {
-      font-weight: 700; /* negrita */
-      letter-spacing: 2px;
-    }
-
-    header h1 span {
-      font-weight: 300; /* más fino */
-    }
-
-    header p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      color: #555;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .product {
-      background: white;
-      border-radius: 12px;
-      padding: 15px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-      text-align: center;
-    }
-
-    .product img {
-      width: 100%;
-      max-height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .product h3 {
-      margin: 10px 0 5px;
-      font-size: 1.1rem;
-    }
-
-    .product p {
-      margin: 3px 0;
-    }
-
-    .buy-buttons {
-      margin-top: 10px;
-    }
-
-    .buy-buttons button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: none;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .mp-button {
-      background: #009ee3;
-      color: white;
-    }
-
-    .mp-button:hover {
-      background: #007bbf;
-    }
-
-    .transfer-button {
-      background: #555;
-      color: white;
-    }
-
-    .transfer-button:hover {
-      background: #333;
-    }
-
-    footer {
-      background: #111;
-      color: #eee;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .socials a {
-      margin: 0 10px;
-      color: #eee;
-      text-decoration: none;
-      font-size: 1.5rem;
-    }
-
-    .newsletter input {
-      padding: 10px;
-      border-radius: 6px;
-      border: none;
-      width: 220px;
-      margin-top: 10px;
-    }
-
-    .newsletter button {
-      padding: 10px 20px;
-      border-radius: 6px;
-      border: none;
-      background: #009ee3;
-      color: white;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-
-    /* Botón flotante WhatsApp */
-    .whatsapp-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25d366;
-      border-radius: 50%;
-      padding: 12px;
-      box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    .whatsapp-button:hover {
-      transform: scale(1.1);
-    }
-
-    .whatsapp-icon {
-      width: 32px;
-      height: 32px;
-      filter: invert(1);
-    }
-  </style>
 </head>
 <body>
   <header>
-    <h1><strong>LUCIANO</strong> <span>clothing</span></h1>
-    <p>Simple. Urbano. Limitado.</p>
+    <img src="assets/img/logo.png" alt="Luciano clothing" class="logo">
+    <h1>Luciano clothing</h1>
   </header>
 
   <main>
-    <section class="products">
-      <!-- Ejemplo producto buzo -->
-      <div class="product">
-        <img src="assets/img/buzo-bordo.jpg" alt="Buzo Bordó L">
-        <h3>Buzo Bordó</h3>
-        <p>Talle: L</p>
-        <p>$27.000</p>
-        <p>Stock: 1 unidad</p>
-        <div class="buy-buttons">
-          <!-- Reemplazá el link de prueba de MercadoPago con el tuyo -->
-          <button class="mp-button" onclick="window.open('https://link.mercadopago.com.ar/tu-enlace', '_blank')">Comprar con MercadoPago</button>
-          <!-- Reemplazá "TU_ALIAS_O_CBU" por tu alias/cbu -->
-          <button class="transfer-button">Transferencia bancaria (Alias: TU_ALIAS_O_CBU)</button>
-        </div>
-      </div>
+    <section class="intro">
+      <h2>Estilo urbano, simple y auténtico</h2>
+      <p>Explorá nuestra colección limitada de buzos y remeras. Stock exclusivo por unidad.</p>
+    </section>
 
-      <!-- Repetí el bloque .product para cada prenda -->
+    <section id="productos">
+      <h2>Productos</h2>
+      <div class="galeria" id="lista-productos">
+        <!-- Los productos se cargan dinámicamente desde script.js -->
+      </div>
+    </section>
+
+    <section id="carrito">
+      <h2>Carrito</h2>
+      <ul id="carrito-lista"></ul>
+      <p id="total"></p>
+      <button id="pagar-mp">Pagar con MercadoPago</button>
+      <p>O transferí a este alias/CBU: <span id="cbu">TU-ALIAS/CBU-AQUI</span></p>
+    </section>
+
+    <section id="newsletter">
+      <h2>Recibí nuestras ofertas</h2>
+      <form id="form-newsletter">
+        <input type="email" id="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+      <p id="mensaje-newsletter"></p>
     </section>
   </main>
 
   <footer>
-    <h3>Seguinos</h3>
-    <div class="socials">
-      <!-- Reemplazá los links por tus redes -->
-      <a href="https://facebook.com/TU_PAGINA" target="_blank">📘</a>
-      <a href="https://instagram.com/TU_INSTAGRAM" target="_blank">📸</a>
-    </div>
-    <div class="newsletter">
-      <p>Suscribite y recibí ofertas exclusivas</p>
-      <input type="email" placeholder="Tu correo">
-      <button>Suscribirme</button>
-    </div>
-    <p style="margin-top:20px; font-size:0.85rem;">&copy; 2025 Luciano clothing. Todos los derechos reservados.</p>
+    <p>&copy; 2025 Luciano clothing - Todos los derechos reservados.</p>
   </footer>
 
-  <!-- Botón WhatsApp -->
-  <!-- Reemplazá el número con el tuyo en formato internacional: https://wa.me/54911TU_NUMERO -->
-  <a href="https://wa.me/5491159797549 
-     class="whatsapp-button" 
-     target="_blank" 
-     rel="noopener noreferrer">
-    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" 
-         alt="WhatsApp" 
-         class="whatsapp-icon">
-  </a>
+  <script src="assets/js/script.js"></script>
 </body>
 </html>
-
