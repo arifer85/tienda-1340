@@ -1,8 +1,8 @@
 const productos = [
   { id: 1, nombre: "Buzo Bordó L", precio: 27000, img: "buzo-bordo.jpg", stock: 1 },
-  { id: 2, nombre: "Buzo Blanco XL", precio: 27000, img: "buzo-blanco.jpg", stock: 1 },
-  { id: 3, nombre: "Buzo Uva L", precio: 27000, img: "buzo-uva.jpg", stock: 1 },
-  { id: 4, nombre: "Buzo Negro XL", precio: 27000, img: "buzo-negro.jpg", stock: 1 },
+  { id: 2, nombre: "Buzo Blanco XL", precio: 27000, img: "buzo-blanco-xl.jpg", stock: 1 },
+  { id: 3, nombre: "Buzo Uva L", precio: 27000, img: "buzo-uva-l.jpg", stock: 1 },
+  { id: 4, nombre: "Buzo Negro XL", precio: 27000, img: "buzo-negro-xl.jpg", stock: 1 },
   { id: 5, nombre: "Buzo Dama Negro S", precio: 27000, img: "buzo-dama-negro.jpg", stock: 1 },
   { id: 6, nombre: "Buzo Dama Camel L", precio: 27000, img: "buzo-dama-camel.jpg", stock: 1 },
   { id: 7, nombre: "Buzo Dama Chocolate M", precio: 27000, img: "buzo-dama-choco.jpg", stock: 1 },
