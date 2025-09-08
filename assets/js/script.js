@@ -87,3 +87,31 @@ document.getElementById("form-newsletter").addEventListener("submit", function(e
   document.getElementById("mensaje-newsletter").textContent = `¡Gracias por suscribirte, ${email}!`;
   this.reset();
 });
+// Abrir modal
+document.getElementById("finalizar-compra").onclick = function() {
+  document.getElementById("checkout-modal").style.display = "block";
+};
+
+// Cerrar modal
+document.querySelector(".close").onclick = function() {
+  document.getElementById("checkout-modal").style.display = "none";
+};
+
+// Enviar datos a WhatsApp
+document.getElementById("checkout-form").onsubmit = function(e) {
+  e.preventDefault();
+
+  const nombre = e.target.nombre.value;
+  const direccion = e.target.direccion.value;
+  const telefono = e.target.telefono.value;
+  const email = e.target.email.value;
+
+  const mensaje = `Nuevo pedido:
+Nombre: ${nombre}
+Dirección: ${direccion}
+Tel: ${telefono}
+Email: ${email}`;
+
+  const url = `https://wa.me/5491159797549?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
+};
