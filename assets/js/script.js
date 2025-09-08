@@ -24,28 +24,31 @@ const listaProductos = document.getElementById("lista-productos");
 
 function mostrarProductos() {
   listaProductos.innerHTML = "";
-  productos.forEach(prod => {
+  productos.forEach((prod) => {
     const div = document.createElement("div");
     div.classList.add("producto");
 
     div.innerHTML = `
-  <span class="badge-limited">Última unidad</span>
-  <img src="${prod.imagen}" alt="${prod.nombre}">
-  <h3>${prod.nombre}</h3>
-  <p>$${prod.precio.toLocaleString("es-AR")}</p>
-  <p>Stock: ${prod.stock > 0 ? prod.stock : "Agotado"}</p>
-  <button ${prod.stock === 0 ? "disabled" : ""} onclick="agregarAlCarrito(${prod.id})">
-    ${prod.stock === 0 ? "Sin stock" : "Agregar al carrito"}
-  </button>
-`;
+      <span class="badge-limited">Última unidad</span>
+      <img src="${prod.imagen}" alt="${prod.nombre}">
+      <h3>${prod.nombre}</h3>
+      <p>$${prod.precio.toLocaleString("es-AR")}</p>
+      <p>Stock: ${prod.stock > 0 ? prod.stock : "Agotado"}</p>
+      <button ${prod.stock === 0 ? "disabled" : ""} onclick="agregarAlCarrito(${prod.id})">
+        ${prod.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+      </button>
+    `;
+    listaProductos.appendChild(div);
+  });
+}
 
-// Agregar al carrito
+// Agregar al carrito (acumula cantidades)
 function agregarAlCarrito(id) {
-  const producto = productos.find(p => p.id === id);
+  const producto = productos.find((p) => p.id === id);
   if (producto && producto.stock > 0) {
     producto.stock -= 1;
 
-    const itemEnCarrito = carrito.find(p => p.id === id);
+    const itemEnCarrito = carrito.find((p) => p.id === id);
     if (itemEnCarrito) {
       itemEnCarrito.cantidad += 1;
     } else {
@@ -57,7 +60,7 @@ function agregarAlCarrito(id) {
   }
 }
 
-// Mostrar carrito
+// Mostrar carrito con cantidades
 function mostrarCarrito() {
   const lista = document.getElementById("carrito-lista");
   const total = document.getElementById("total");
@@ -65,25 +68,26 @@ function mostrarCarrito() {
   lista.innerHTML = "";
   let suma = 0;
 
-  carrito.forEach(item => {
+  carrito.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString("es-AR")}`;
+    li.textContent = `${item.nombre} x${item.cantidad} - $${(
+      item.precio * item.cantidad
+    ).toLocaleString("es-AR")}`;
     lista.appendChild(li);
     suma += item.precio * item.cantidad;
   });
 
-  if (suma > 0) {
-    total.textContent = `Total: $${suma.toLocaleString("es-AR")} (Envío gratis 🚚)`;
-  } else {
-    total.textContent = "Carrito vacío";
-  }
+  total.textContent =
+    suma > 0
+      ? `Total: $${suma.toLocaleString("es-AR")} (Envío gratis 🚚)`
+      : "Carrito vacío";
 }
 
-// Inicializar
+// Inicializar catálogo
 mostrarProductos();
 
 // Newsletter (simulado)
-document.getElementById("form-newsletter").addEventListener("submit", function(e){
+document.getElementById("form-newsletter").addEventListener("submit", function (e) {
   e.preventDefault();
   const email = document.getElementById("newsletter-email").value;
   document.getElementById("mensaje-newsletter").textContent = `¡Gracias por suscribirte, ${email}!`;
@@ -108,7 +112,9 @@ finalizarCompraBtn.addEventListener("click", () => {
   checkoutLista.innerHTML = "";
   carrito.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString("es-AR")}`;
+    li.textContent = `${item.nombre} x${item.cantidad} - $${(
+      item.precio * item.cantidad
+    ).toLocaleString("es-AR")}`;
     checkoutLista.appendChild(li);
   });
 
@@ -140,15 +146,16 @@ checkoutForm.addEventListener("submit", (e) => {
   mensaje += `📦 *Pedido:*%0A`;
 
   carrito.forEach((item) => {
-    mensaje += `- ${item.nombre} x${item.cantidad} = $${(item.precio * item.cantidad).toLocaleString("es-AR")}%0A`;
+    mensaje += `- ${item.nombre} x${item.cantidad} = $${(
+      item.precio * item.cantidad
+    ).toLocaleString("es-AR")}%0A`;
   });
 
   const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
   mensaje += `%0A💰 Total: $${total.toLocaleString("es-AR")}%0A%0A`;
-
   mensaje += `✅ Confirmar stock y forma de pago.`;
 
-  const telefonoTienda = "5491159797549"; 
+  const telefonoTienda = "5491159797549";
   const url = `https://wa.me/${telefonoTienda}?text=${mensaje}`;
 
   window.open(url, "_blank");
