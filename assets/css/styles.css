@@ -27,6 +27,21 @@ body {
 .hero h2 {
   font-size: 1.5rem;
   color: #666;
+  /* Fondo negro y estilo del header */
+header {
+  background: #000;     /* negro */
+  color: #fff;          /* letras blancas */
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;      /* agranda el título */
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 2px;  /* separa un poquito las letras */
+}
+
 }
 .btn-primary {
   display: inline-block;
