@@ -139,3 +139,71 @@ Email: ${email}`;
   const url = `https://wa.me/5491159797549?text=${encodeURIComponent(mensaje)}`;
   window.open(url, "_blank");
 };
+// --- Checkout Modal ---
+const checkoutModal = document.getElementById("checkout-modal");
+const finalizarCompraBtn = document.getElementById("finalizar-compra");
+const closeModal = document.querySelector(".modal .close");
+const checkoutLista = document.getElementById("checkout-lista");
+const checkoutTotal = document.getElementById("checkout-total");
+const checkoutForm = document.getElementById("checkout-form");
+
+let carrito = []; // Si ya tenés carrito definido, unificá esta variable
+
+// Mostrar modal y resumen del carrito
+finalizarCompraBtn.addEventListener("click", () => {
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío.");
+    return;
+  }
+
+  checkoutLista.innerHTML = "";
+  carrito.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = `${item.nombre} x${item.cantidad} - $${item.precio * item.cantidad}`;
+    checkoutLista.appendChild(li);
+  });
+
+  const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  checkoutTotal.textContent = `Total: $${total}`;
+
+  checkoutModal.style.display = "block";
+});
+
+// Cerrar modal
+closeModal.addEventListener("click", () => {
+  checkoutModal.style.display = "none";
+});
+
+// Enviar pedido por WhatsApp
+checkoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const nombre = document.getElementById("nombre").value;
+  const direccion = document.getElementById("direccion").value;
+  const telefono = document.getElementById("telefono").value;
+  const email = document.getElementById("email").value;
+
+  let mensaje = `🛍️ *Nuevo pedido Luciano Clothing*%0A%0A`;
+  mensaje += `👤 Cliente: ${nombre}%0A`;
+  mensaje += `📍 Dirección: ${direccion}%0A`;
+  mensaje += `📞 Teléfono: ${telefono}%0A`;
+  mensaje += `✉️ Email: ${email}%0A%0A`;
+  mensaje += `📦 *Pedido:*%0A`;
+
+  carrito.forEach((item) => {
+    mensaje += `- ${item.nombre} x${item.cantidad} = $${item.precio * item.cantidad}%0A`;
+  });
+
+  const total = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+  mensaje += `%0A💰 Total: $${total}%0A%0A`;
+
+  mensaje += `✅ Confirmar stock y forma de pago.`;
+
+  const telefonoTienda = "5491159797549"; // Tu número de WhatsApp con código de país
+  const url = `https://wa.me/${telefonoTienda}?text=${mensaje}`;
+
+  window.open(url, "_blank");
+
+  checkoutModal.style.display = "none";
+  checkoutForm.reset();
+});
