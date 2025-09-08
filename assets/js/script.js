@@ -1,78 +1,90 @@
+// Lista de productos
 const productos = [
-  { id: 1, nombre: "Buzo Bordó L", precio: 27000, img: "buzo-bordo.jpg", stock: 1 },
-  { id: 2, nombre: "Buzo Blanco XL", precio: 27000, img: "buzo-blanco.jpg", stock: 1 },
-  { id: 3, nombre: "Buzo Uva L", precio: 27000, img: "buzo-uva.jpg", stock: 1 },
-  { id: 4, nombre: "Buzo Negro XL", precio: 27000, img: "buzo-negro.jpg", stock: 1 },
-  { id: 5, nombre: "Buzo Dama Negro S", precio: 27000, img: "buzo-dama-negro.jpg", stock: 1 },
-  { id: 6, nombre: "Buzo Dama Camel L", precio: 27000, img: "buzo-dama-camel.jpg", stock: 1 },
-  { id: 7, nombre: "Buzo Dama Chocolate M", precio: 27000, img: "buzo-dama-choco.jpg", stock: 1 },
-  { id: 8, nombre: "Buzo Dama Blanco XL", precio: 27000, img: "buzo-dama-blanco.jpg", stock: 1 },
-  { id: 9, nombre: "Remera Hombre Negra L", precio: 15000, img: "remera-negra-l.jpg", stock: 1 },
-  { id: 10, nombre: "Remera Hombre Negra XL", precio: 15000, img: "remera-negra-xl.jpg", stock: 1 },
-  { id: 11, nombre: "Remera Hombre Negra M", precio: 15000, img: "remera-negra-m.jpg", stock: 1 },
-  { id: 12, nombre: "Remera Hombre Blanca L", precio: 15000, img: "remera-blanca-l.jpg", stock: 1 },
-  { id: 13, nombre: "Remera Dama Negra XXL", precio: 15000, img: "remera-dama-negra-xxl.jpg", stock: 1 },
-  { id: 14, nombre: "Remera Dama Gris L", precio: 15000, img: "remera-dama-gris-l.jpg", stock: 1 },
-  { id: 15, nombre: "Remera Dama Negra XL", precio: 15000, img: "remera-dama-negra-xl.jpg", stock: 1 },
-  { id: 16, nombre: "Remera Dama Negra S", precio: 15000, img: "remera-dama-negra-s.jpg", stock: 1 }
+  // Buzos hombre
+  { id: 1, nombre: "Buzo Bordó Hombre (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-bordo.jpg" },
+  { id: 2, nombre: "Buzo Blanco Hombre (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-blanco-hombre.jpg" },
+  { id: 3, nombre: "Buzo Uva Hombre (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-uva.jpg" },
+  { id: 4, nombre: "Buzo Negro Hombre (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-negro-hombre.jpg" },
+
+  // Buzos dama
+  { id: 5, nombre: "Buzo Negro Dama (S)", precio: 27000, stock: 1, imagen: "assets/img/buzo-negro-dama.jpg" },
+  { id: 6, nombre: "Buzo Camel Dama (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-camel.jpg" },
+  { id: 7, nombre: "Buzo Chocolate Dama (M)", precio: 27000, stock: 1, imagen: "assets/img/buzo-chocolate.jpg" },
+  { id: 8, nombre: "Buzo Blanco Dama (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-blanco-dama.jpg" },
+
+  // Remeras hombre
+  { id: 9, nombre: "Remera Negra Hombre (M)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-m.jpg" },
+  { id: 10, nombre: "Remera Negra Hombre (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-l.jpg" },
+  { id: 11, nombre: "Remera Negra Hombre (XL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-xl.jpg" },
+  { id: 12, nombre: "Remera Blanca Hombre (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-blanca-l.jpg" },
+
+  // Remeras dama
+  { id: 13, nombre: "Remera Negra Dama (S)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-s.jpg" },
+  { id: 14, nombre: "Remera Negra Dama (XL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-xl-dama.jpg" },
+  { id: 15, nombre: "Remera Negra Dama (XXL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-xxl.jpg" },
+  { id: 16, nombre: "Remera Gris Dama (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-gris-l.jpg" }
 ];
 
 let carrito = [];
 
-function cargarProductos() {
-  const contenedor = document.getElementById("lista-productos");
-  productos.forEach(p => {
+// Renderizar productos
+const listaProductos = document.getElementById("lista-productos");
+
+function mostrarProductos() {
+  listaProductos.innerHTML = "";
+  productos.forEach(prod => {
     const div = document.createElement("div");
-    div.classList.add("item");
+    div.classList.add("producto");
+
     div.innerHTML = `
-      <img src="assets/img/${p.img}" alt="${p.nombre}">
-      <p>${p.nombre}</p>
-      <span>$${p.precio}</span>
-      <button onclick="agregarAlCarrito(${p.id})" ${p.stock === 0 ? "disabled" : ""}>
-        ${p.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+      <img src="${prod.imagen}" alt="${prod.nombre}">
+      <h3>${prod.nombre}</h3>
+      <p>$${prod.precio.toLocaleString("es-AR")}</p>
+      <p>Stock: ${prod.stock > 0 ? prod.stock : "Agotado"}</p>
+      <button ${prod.stock === 0 ? "disabled" : ""} onclick="agregarAlCarrito(${prod.id})">
+        ${prod.stock === 0 ? "Sin stock" : "Agregar al carrito"}
       </button>
     `;
-    contenedor.appendChild(div);
+    listaProductos.appendChild(div);
   });
 }
 
+// Agregar al carrito
 function agregarAlCarrito(id) {
   const producto = productos.find(p => p.id === id);
   if (producto && producto.stock > 0) {
-    carrito.push(producto);
     producto.stock -= 1;
-    actualizarCarrito();
-    actualizarProductos();
+    carrito.push(producto);
+    mostrarCarrito();
+    mostrarProductos();
   }
 }
 
-function actualizarCarrito() {
+// Mostrar carrito
+function mostrarCarrito() {
   const lista = document.getElementById("carrito-lista");
+  const total = document.getElementById("total");
+
   lista.innerHTML = "";
-  carrito.forEach((p, i) => {
+  let suma = 0;
+
+  carrito.forEach((item, index) => {
     const li = document.createElement("li");
-    li.textContent = `${p.nombre} - $${p.precio}`;
+    li.textContent = `${item.nombre} - $${item.precio.toLocaleString("es-AR")}`;
     lista.appendChild(li);
+    suma += item.precio;
   });
-  const total = carrito.reduce((acc, p) => acc + p.precio, 0);
-  document.getElementById("total").textContent = `Total: $${total}`;
+
+  total.textContent = `Total: $${suma.toLocaleString("es-AR")}`;
 }
 
-function actualizarProductos() {
-  const contenedor = document.getElementById("lista-productos");
-  contenedor.innerHTML = "";
-  cargarProductos();
-}
+// Inicializar
+mostrarProductos();
 
-document.getElementById("form-newsletter").addEventListener("submit", function(e) {
+// Newsletter (simulado)
+document.getElementById("form-newsletter").addEventListener("submit", function(e){
   e.preventDefault();
   const email = document.getElementById("email").value;
-  document.getElementById("mensaje-newsletter").textContent = "¡Gracias por suscribirte!";
-  console.log("Nuevo suscriptor:", email);
+  document.getElementById("mensaje-newsletter").textContent = `¡Gracias por suscribirte, ${email}!`;
+  this.reset();
 });
-
-document.getElementById("pagar-mp").addEventListener("click", function() {
-  window.open("https://www.mercadopago.com.ar/", "_blank");
-});
-
-cargarProductos();
