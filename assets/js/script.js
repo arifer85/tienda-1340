@@ -48,18 +48,25 @@ function mostrarProductos() {
   });
 }
 
-// Agregar al carrito
+// Agregar al carrito (acumula cantidades)
 function agregarAlCarrito(id) {
   const producto = productos.find(p => p.id === id);
   if (producto && producto.stock > 0) {
     producto.stock -= 1;
-    carrito.push(producto);
+
+    const itemEnCarrito = carrito.find(p => p.id === id);
+    if (itemEnCarrito) {
+      itemEnCarrito.cantidad += 1;
+    } else {
+      carrito.push({ ...producto, cantidad: 1 });
+    }
+
     mostrarCarrito();
     mostrarProductos();
   }
 }
 
-// Mostrar carrito
+// Mostrar carrito con cantidades
 function mostrarCarrito() {
   const lista = document.getElementById("carrito-lista");
   const total = document.getElementById("total");
@@ -67,14 +74,18 @@ function mostrarCarrito() {
   lista.innerHTML = "";
   let suma = 0;
 
-  carrito.forEach((item, index) => {
+  carrito.forEach(item => {
     const li = document.createElement("li");
-    li.textContent = `${item.nombre} - $${item.precio.toLocaleString("es-AR")}`;
+    li.textContent = `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString("es-AR")}`;
     lista.appendChild(li);
-    suma += item.precio;
+    suma += item.precio * item.cantidad;
   });
 
-  total.textContent = `Total: $${suma.toLocaleString("es-AR")}`;
+  if (suma > 0) {
+    total.textContent = `Total: $${suma.toLocaleString("es-AR")} (Envío gratis 🚚)`;
+  } else {
+    total.textContent = "Carrito vacío";
+  }
 }
 
 // Inicializar
@@ -87,8 +98,13 @@ document.getElementById("form-newsletter").addEventListener("submit", function(e
   document.getElementById("mensaje-newsletter").textContent = `¡Gracias por suscribirte, ${email}!`;
   this.reset();
 });
-// Abrir modal
+
+// Abrir modal checkout
 document.getElementById("finalizar-compra").onclick = function() {
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío.");
+    return;
+  }
   document.getElementById("checkout-modal").style.display = "block";
 };
 
@@ -97,7 +113,7 @@ document.querySelector(".close").onclick = function() {
   document.getElementById("checkout-modal").style.display = "none";
 };
 
-// Enviar datos a WhatsApp
+// Enviar datos a WhatsApp con resumen del pedido
 document.getElementById("checkout-form").onsubmit = function(e) {
   e.preventDefault();
 
@@ -106,7 +122,15 @@ document.getElementById("checkout-form").onsubmit = function(e) {
   const telefono = e.target.telefono.value;
   const email = e.target.email.value;
 
-  const mensaje = `Nuevo pedido:
+  const resumen = carrito.map(item => `${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString("es-AR")}`).join("\n");
+  const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+
+  const mensaje = `🛒 Nuevo pedido
+----------------------
+${resumen}
+Total: $${total.toLocaleString("es-AR")} (Envío gratis 🚚)
+
+📌 Datos del cliente:
 Nombre: ${nombre}
 Dirección: ${direccion}
 Tel: ${telefono}
