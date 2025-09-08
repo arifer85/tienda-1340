@@ -194,21 +194,20 @@ footer a:hover { text-decoration: underline; }
   left: 0; top: 0;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
   max-width: 400px;
-  margin: 10% auto;
+  width: 90%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-.modal-content h2 { margin-top: 0; }
-.close {
-  float: right;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+
 /* Estilos extra para checkout */
 #checkout-resumen {
   margin-bottom: 20px;
