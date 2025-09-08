@@ -1,126 +1,133 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Luciano clothing</title>
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <!-- Banner fijo -->
   <div class="top-banner">
     🚚 Envío gratis en todas tus compras · Atención personalizada por WhatsApp
   </div>
-  <!-- Hero -->
+
+  <!-- Header -->
   <header>
-  <div class="header-container">
-    <img src="assets/img/logochico.png" alt="Luciano clothing" class="logo">
-    <h1>LUCIANO clothing</h1>
-  </div>
-</header>
+    <div class="header-container">
+      <img src="assets/img/logochico.png" alt="Luciano clothing" class="logo"/>
+      <h1>LUCIANO clothing</h1>
+    </div>
+  </header>
+
   <main>
     <!-- Intro -->
     <section class="intro">
       <p>Explorá nuestra colección exclusiva de buzos y remeras. Cada prenda disponible en <strong>una sola unidad</strong>. ¡No te quedes sin la tuya!</p>
     </section>
+
+    <!-- Aviso envío -->
     <section class="envio-gratis">
-  <p>🚚 Envío gratuito a todo el país en todas tus compras</p>
+      <p>🚚 Envío gratuito a todo el país en todas tus compras</p>
     </section>
-      <!-- Productos -->
+
+    <!-- Productos -->
     <section id="productos">
-        <h2>Productos</h2>
-      <div class="galeria" id="lista-productos">
-        <!-- Los productos se cargan dinámicamente desde script.js -->
-      </div>
+      <h2>Productos</h2>
+      <div class="galeria" id="lista-productos"><!-- se llena con JS --></div>
     </section>
 
     <!-- Carrito -->
     <section id="carrito">
       <h2>Tu carrito</h2>
       <ul id="carrito-lista"></ul>
-      <p id="total"></p>
-  <!-- Botón nuevo -->
-      <button id="finalizar-compra" class="btn-cta">Finalizar compra</button>     
-<!-- Modal de Checkout -->
-<div id="checkout-modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Finalizar compra</h2>
+      <p id="total">Carrito vacío</p>
+      <button id="finalizar-compra" class="btn-cta">Finalizar compra</button>
+    </section>
 
-    <!-- Resumen del pedido -->
-    <div id="checkout-resumen">
-      <h3>Tu pedido</h3>
-      <ul id="checkout-lista"></ul>
-      <p id="checkout-total"></p>
-      <hr>
+    <!-- Modal de Checkout -->
+    <div id="checkout-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" aria-label="Cerrar">&times;</span>
+        <h2>Finalizar compra</h2>
+
+        <!-- Resumen del pedido -->
+        <div id="checkout-resumen">
+          <h3>Tu pedido</h3>
+          <ul id="checkout-lista"></ul>
+          <p id="checkout-total"></p>
+          <hr/>
+        </div>
+
+        <!-- Formulario de datos del cliente -->
+        <form id="checkout-form">
+          <label for="nombre">Nombre y apellido:</label>
+          <input type="text" id="nombre" name="nombre" required/>
+
+          <label for="direccion">Dirección de envío:</label>
+          <input type="text" id="direccion" name="direccion" required/>
+
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" name="telefono" required/>
+
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" name="email" required/>
+
+          <button type="submit">Confirmar pedido por WhatsApp</button>
+        </form>
+      </div>
     </div>
 
-    <!-- Formulario de datos del cliente -->
-    <form id="checkout-form">
-      <label for="nombre">Nombre y apellido:</label>
-      <input type="text" id="nombre" name="nombre" required>
-
-      <label for="direccion">Dirección de envío:</label>
-      <input type="text" id="direccion" name="direccion" required>
-
-      <label for="telefono">Teléfono:</label>
-      <input type="tel" id="telefono" name="telefono" required>
-
-      <label for="email">Correo electrónico:</label>
-      <input type="email" id="email" name="email" required>
-
-      <button type="submit">Confirmar pedido por WhatsApp</button>
-    </form>
-  </div>
-</div>
-
-
     <!-- Newsletter -->
-    <form id="form-newsletter">
-  <input type="email" id="newsletter-email" placeholder="Tu correo electrónico" required>
-  <button type="submit">Suscribirme</button>
-</form>
-     <section class="trust">
-  <div class="trust-item">🔒 Comprá con tranquilidad: atención directa y personalizada</div>
-  <div class="trust-item">🚚 Envíos a todo el país</div>
-  <div class="trust-item">🧾 Cambios dentro de los 7 días (prendas sin uso)</div>
-</section>
- 
+    <section id="newsletter">
+      <h2>Recibí nuestras ofertas</h2>
+      <form id="form-newsletter">
+        <input type="email" id="newsletter-email" placeholder="Tu correo electrónico" required/>
+        <button type="submit">Suscribirme</button>
+      </form>
+      <p id="mensaje-newsletter"></p>
+    </section>
+
+    <!-- Confianza -->
+    <section class="trust">
+      <div class="trust-item">🔒 Comprá con tranquilidad: atención directa y personalizada</div>
+      <div class="trust-item">🚚 Envíos a todo el país</div>
+      <div class="trust-item">🧾 Cambios dentro de los 7 días (prendas sin uso)</div>
+    </section>
+  </main>
+
   <!-- Footer -->
- <footer>
-  <p>&copy; 2025 Luciano clothing - Todos los derechos reservados.</p>
-  <div class="socials">
-    <a href="https://www.instagram.com/TU_INSTAGRAM" target="_blank" aria-label="Instagram" class="social-icon">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
-        <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.75a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
-      </svg>
-    </a>
-    <a href="https://www.facebook.com/TU_FACEBOOK" target="_blank" aria-label="Facebook" class="social-icon">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
-        <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07C2 17.1 5.66 21.2 10.44 22v-7.02H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56V12h2.77l-.44 2.98h-2.33V22C18.34 21.2 22 17.1 22 12.07z"/>
-      </svg>
-    </a>
-  </div>
-</footer>
+  <footer>
+    <p>&copy; 2025 Luciano clothing - Todos los derechos reservados.</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/TU_INSTAGRAM" target="_blank" aria-label="Instagram" class="social-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+          <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm11 1.75a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/TU_FACEBOOK" target="_blank" aria-label="Facebook" class="social-icon">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+          <path d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07C2 17.1 5.66 21.2 10.44 22v-7.02H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.62.77-1.62 1.56V12h2.77l-.44 2.98h-2.33V22C18.34 21.2 22 17.1 22 12.07z"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
 
-
-  <!-- Scripts -->
+  <!-- JS -->
   <script src="assets/js/script.js"></script>
 
- <div class="whatsapp-container">
-  <a href="https://wa.me/5491159797549?text=Hola%20quisiera%20hacer%20una%20consulta%20sobre%20los%20productos%20de%20Luciano%20clothing"
-     target="_blank"
-     rel="noopener noreferrer">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-     alt="WhatsApp" 
-     class="whatsapp-icon">
-  </a>
-  <div class="whatsapp-bubble">
-    ¿Tenés dudas o querés coordinar tu envío?  
-    <strong>Chateá con nosotros</strong>
+  <!-- WhatsApp flotante con burbuja -->
+  <div class="whatsapp-container">
+    <a href="https://wa.me/5491159797549?text=Hola%20quisiera%20hacer%20una%20consulta%20sobre%20los%20productos%20de%20Luciano%20clothing"
+       target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+           alt="WhatsApp" class="whatsapp-icon"/>
+    </a>
+    <div class="whatsapp-bubble">
+      ¿Tenés dudas o querés coordinar tu envío?
+      <strong>Chateá con nosotros</strong>
+    </div>
   </div>
-</div>
-
 </body>
 </html>
