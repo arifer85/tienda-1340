@@ -42,6 +42,27 @@
       <button id="pagar-mp" class="btn-mp">Pagar con MercadoPago</button>
       <p>O transferí a este alias/CBU: <span id="cbu">TU-ALIAS/CBU-AQUI</span></p>
     </section>
+<div id="checkout-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Finalizar compra</h2>
+    <form id="checkout-form">
+      <label>Nombre y apellido:</label>
+      <input type="text" name="nombre" required>
+
+      <label>Dirección de envío:</label>
+      <input type="text" name="direccion" required>
+
+      <label>Teléfono:</label>
+      <input type="tel" name="telefono" required>
+
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <button type="submit">Confirmar pedido</button>
+    </form>
+  </div>
+</div>
 
     <!-- Newsletter -->
     <section id="newsletter">
