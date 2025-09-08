@@ -272,3 +272,13 @@ header h1 {
   letter-spacing: 2px;  /* separa un poquito las letras */
 }
 Paso 4 – Guardá
+.envio-gratis {
+  background: #f8f8f8;
+  text-align: center;
+  font-weight: bold;
+  color: #222;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
