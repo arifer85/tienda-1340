@@ -369,3 +369,36 @@ Paso 4 – Guardá
     display: none; /* solo se muestra el ícono en celular */
   }
 }
+/* Fondo negro detrás de logo y título */
+header {
+  background: #000;   /* negro */
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.header-container {
+  display: inline-block;
+}
+
+header h1 {
+  color: #fff;        /* letras blancas */
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+header img.logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+@media (max-width: 600px) {
+  header img.logo {
+    max-width: 120px; /* logo más chico */
+  }
+
+  header h1 {
+    font-size: 1.4rem; /* título más chico */
+  }
+}
