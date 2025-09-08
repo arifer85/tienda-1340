@@ -29,17 +29,15 @@ function mostrarProductos() {
     div.classList.add("producto");
 
     div.innerHTML = `
-      <img src="${prod.imagen}" alt="${prod.nombre}">
-      <h3>${prod.nombre}</h3>
-      <p>$${prod.precio.toLocaleString("es-AR")}</p>
-      <p>Stock: ${prod.stock > 0 ? prod.stock : "Agotado"}</p>
-      <button ${prod.stock === 0 ? "disabled" : ""} onclick="agregarAlCarrito(${prod.id})">
-        ${prod.stock === 0 ? "Sin stock" : "Agregar al carrito"}
-      </button>
-    `;
-    listaProductos.appendChild(div);
-  });
-}
+  <span class="badge-limited">Última unidad</span>
+  <img src="${prod.imagen}" alt="${prod.nombre}">
+  <h3>${prod.nombre}</h3>
+  <p>$${prod.precio.toLocaleString("es-AR")}</p>
+  <p>Stock: ${prod.stock > 0 ? prod.stock : "Agotado"}</p>
+  <button ${prod.stock === 0 ? "disabled" : ""} onclick="agregarAlCarrito(${prod.id})">
+    ${prod.stock === 0 ? "Sin stock" : "Agregar al carrito"}
+  </button>
+`;
 
 // Agregar al carrito
 function agregarAlCarrito(id) {
