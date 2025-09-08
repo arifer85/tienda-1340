@@ -358,3 +358,13 @@ footer a:hover { text-decoration: underline; }
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,.3);
 }
+.badge-limited{
+  display:inline-block;
+  background:#ffe8b0;
+  color:#8a5a00;
+  font-weight:700;
+  padding:4px 8px;
+  border-radius:10px;
+  font-size:.75rem;
+  margin-bottom:8px;
+}
