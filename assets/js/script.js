@@ -1,28 +1,27 @@
 // Lista de productos
 const productos = [
   // Buzos hombre
-  { id: 1, nombre: "Buzo Bordó Hombre (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-bordo.jpg" },
+  { id: 1, nombre: "Buzo Bordó Hombre (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-bordo-hombre.jpg" },
   { id: 2, nombre: "Buzo Blanco Hombre (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-blanco-hombre.jpg" },
-  { id: 3, nombre: "Buzo Uva Hombre (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-uva.jpg" },
+  { id: 3, nombre: "Buzo Uva Hombre (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-uva-hombre.jpg" },
   { id: 4, nombre: "Buzo Negro Hombre (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-negro-hombre.jpg" },
 
   // Buzos dama
   { id: 5, nombre: "Buzo Negro Dama (S)", precio: 27000, stock: 1, imagen: "assets/img/buzo-negro-dama.jpg" },
   { id: 6, nombre: "Buzo Camel Dama (L)", precio: 27000, stock: 1, imagen: "assets/img/buzo-camel.jpg" },
   { id: 7, nombre: "Buzo Chocolate Dama (M)", precio: 27000, stock: 1, imagen: "assets/img/buzo-chocolate.jpg" },
-  { id: 8, nombre: "Buzo Blanco Dama (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-blanco-dama.jpg" },
+  { id: 8, nombre: "Buzo Blanco Dama (XL)", precio: 27000, stock: 1, imagen: "assets/img/buzo-dama-blanco.jpg" },
 
   // Remeras hombre
-  { id: 9, nombre: "Remera Negra Hombre (M)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-m.jpg" },
-  { id: 10, nombre: "Remera Negra Hombre (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-l.jpg" },
-  { id: 11, nombre: "Remera Negra Hombre (XL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-xl.jpg" },
-  { id: 12, nombre: "Remera Blanca Hombre (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-blanca-l.jpg" },
+  { id: 9, nombre: "Remera Negra Hombre (M)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-hombre-m.jpg" },
+  { id: 10, nombre: "Remera Negra Hombre (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-hombre-l.jpg" },
+  { id: 11, nombre: "Remera Negra Hombre (XL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-hombre-xl.jpg" },
+  { id: 12, nombre: "Remera Blanca Hombre (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-blanca-hombre-l.jpg" },
 
   // Remeras dama
-  { id: 13, nombre: "Remera Negra Dama (S)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-s.jpg" },
-  { id: 14, nombre: "Remera Negra Dama (XL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-xl-dama.jpg" },
-  { id: 15, nombre: "Remera Negra Dama (XXL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-xxl.jpg" },
-  { id: 16, nombre: "Remera Gris Dama (L)", precio: 15000, stock: 1, imagen: "assets/img/remera-gris-l.jpg" }
+  { id: 13, nombre: "Remera Negra Dama (S)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-dama-s.jpg" },
+  { id: 14, nombre: "Remera Negra Dama (XL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-dama-xl.jpg" },
+  { id: 15, nombre: "Remera Negra Dama (XXL)", precio: 15000, stock: 1, imagen: "assets/img/remera-negra-dama-xxl.jpg" },
 ];
 
 let carrito = [];
