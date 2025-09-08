@@ -268,3 +268,93 @@ footer a:hover { text-decoration: underline; }
 #checkout-form button:hover {
   background: #1ebe5d;
 }
+/* --- Banner fijo arriba --- */
+.top-banner{
+  position: sticky; /* queda pegado arriba al hacer scroll */
+  top: 0;
+  z-index: 1000;
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+/* --- Botón CTA (carrito) --- */
+.btn-cta{
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, background .2s ease;
+  width: 100%;
+  max-width: 320px;
+}
+.btn-cta:hover{ background:#333; transform: translateY(-1px); }
+
+/* --- Trust section --- */
+.trust{
+  max-width: 900px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 12px;
+  padding: 0 16px;
+}
+.trust-item{
+  background:#f7f7f7;
+  border:1px solid #e6e6e6;
+  border-radius:12px;
+  padding:12px 14px;
+  text-align:center;
+  font-weight:600;
+  color:#222;
+}
+
+/* --- Footer redes --- */
+.socials{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+.social-icon{
+  display: inline-flex;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  align-items: center; justify-content: center;
+  background: #222; color: #fff;
+  transition: transform .15s ease, background .2s ease;
+}
+.social-icon:hover{ background:#333; transform: translateY(-1px); }
+
+/* --- Ajustes de header y logo en móvil (un toque más chico) --- */
+@media (max-width: 600px){
+  header img.logo{ max-width: 100px; }
+  header h1{ font-size: 1.3rem; }
+}
+
+/* --- Modal centrado (asegura que no tape WhatsApp y quede al centro) --- */
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content{
+  background:#fff;
+  width: 92%;
+  max-width: 420px;
+  max-height: 90vh;
+  overflow: auto;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.3);
+}
