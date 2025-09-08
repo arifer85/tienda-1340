@@ -355,3 +355,17 @@ Paso 4 – Guardá
   from { opacity: 0; transform: translateX(10px); }
   to { opacity: 1; transform: translateX(0); }
 }
+/* Ajustes para celulares */
+@media (max-width: 600px) {
+  header img.logo {
+    max-width: 120px; /* más chico en celu */
+  }
+
+  header h1 {
+    font-size: 1.5rem; /* reduce el título */
+  }
+
+  .whatsapp-bubble {
+    display: none; /* solo se muestra el ícono en celular */
+  }
+}
